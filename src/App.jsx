@@ -8,6 +8,7 @@ import Tickets from "./pages/TicketsPage/index.jsx";
 import Hotels from "./pages/HotelsPage/index.jsx";
 import DetailsProvider from "./contexts/detailsContext.jsx";
 import Ticket from "./pages/TicketPage/index.jsx";
+import Hotel from "./pages/HotelPage/index.jsx";
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/tickets/:id" element={<Ticket />} />
             <Route path="/hotels" element={<Hotels />} />
+            <Route path="/hotels/:id" element={<Hotel />} />
           </Routes>
         </DetailsProvider>
       </Container>

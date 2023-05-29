@@ -30,7 +30,7 @@ const getHotels = (query) => {
   return axiosInstance.get(`/hotels?${query}`);
 };
 
-const getHotelsById = (id) => {
+const getHotelById = (id) => {
   return axiosInstance.get(`/hotels/${id}`);
 };
 
@@ -39,5 +39,5 @@ export default {
   getTickets,
   getTicketById,
   getHotels,
-  getHotelsById
+  getHotelById
 };

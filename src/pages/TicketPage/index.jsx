@@ -1,22 +1,30 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Container } from "./style.jsx";
+import { Button, Container, LoadingContainer } from "./style.jsx";
 import { DetailsContext } from "../../contexts/detailsContext.jsx";
 import api from "../../services/api.js";
 import { createSearchParams, useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import { Oval } from "react-loader-spinner";
+import colors from "../../constants/colors.js";
 
 export default function Ticket() {
   const { id } = useParams();
   const [ticket, setTicket] = useState({});
   const { cities } = useContext(DetailsContext);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api.getTicketById(id)
       .then(res => {
         setTicket(res.data);
+        setLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
 
   const handleClick = (e) => {
@@ -28,6 +36,25 @@ export default function Ticket() {
       search: `${createSearchParams(params)}`
     });
   };
+
+  if (loading) {
+    return (
+      <LoadingContainer>
+        <Oval
+          height={80}
+          width={80}
+          color={colors.primaryColor}
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel='oval-loading'
+          secondaryColor="#FFFFFF"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      </LoadingContainer>
+    );
+  }
 
   return (
     <Container>

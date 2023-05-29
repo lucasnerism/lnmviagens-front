@@ -33,3 +33,10 @@ export const Button = styled.button`
   text-align: center;
   align-self: center;
 `;
+
+export const LoadingContainer = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+`;

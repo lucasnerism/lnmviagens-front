@@ -11,7 +11,7 @@ export default function Header() {
         <Link to={'/tickets'}><h2>Passagens</h2></Link>
         <Link to={'/hotels'}><h2>Hotéis</h2></Link>
       </div>
-      <div><IoPerson className="react-icons" /></div>
+      {/* {<div><IoPerson className="react-icons" /></div>} */}
     </Container>
   );
 }
