@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Container } from "./style.js";
+import { Container } from "./style.jsx";
 import { IoLogoLinkedin } from "react-icons/io5";
 
 export default function Footer() {

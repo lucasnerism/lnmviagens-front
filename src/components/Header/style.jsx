@@ -34,5 +34,8 @@ export const Container = styled.header`
   .react-icons{
       font-size: 22px;
       margin: 0 2px 0 5px;
+      &:last-child{
+        cursor: pointer;
+      }
     }
 `;
