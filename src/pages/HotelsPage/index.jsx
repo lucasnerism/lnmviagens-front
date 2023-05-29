@@ -8,7 +8,7 @@ export default function Hotels() {
   const [form, setForm] = useState({ minPrice: 0, maxPrice: 0, orderBy: "price", city: "" });
   const [searchParams] = useSearchParams();
   const { maxPriceHotel, cities } = useContext(DetailsContext);
-  const [city, setCity] = useState({});
+  const [city, setCity] = useState("");
   const [hotels, setHotels] = useState([]);
 
 
@@ -44,6 +44,9 @@ export default function Hotels() {
     const params = { ...form };
     const querystring = createSearchParams(params).toString();
     history.pushState(null, '', location.pathname + '?' + querystring);
+    if (params.city === "") {
+      setCity("");
+    }
     api.getHotels(querystring)
       .then(res => {
         const ids = res.data.map(({ id }) => id);
@@ -76,6 +79,7 @@ export default function Hotels() {
             <Select name="city"
               value={form.city}
               onChange={handleChange}>
+              <option value={""}>Limpar escolha</option>
               {cities?.map(city => <option key={city.id} value={city.id}>{`${city.name}, ${city.stateName}, ${city.countryName}`}</option>)}
             </Select>
           </label>

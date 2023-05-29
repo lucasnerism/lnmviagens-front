@@ -11,7 +11,7 @@ export const Filter = styled.aside`
   width: 200px;
   height: 100%;
   border-right: 2px solid rgba(25, 35, 57, 0.25);
-  padding-top: 40px;
+  padding-top: 40px;  
 `;
 
 export const Form = styled.form`
@@ -46,6 +46,7 @@ export const RightContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
   h1{
     font-size: 28px;
     color: ${colors.primaryColor};

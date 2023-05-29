@@ -9,22 +9,23 @@ export default function Tickets() {
   const [form, setForm] = useState({ minPrice: "0", maxPrice: "0", orderBy: "departure_date", fromCity: "", toCity: "" });
   const [searchParams] = useSearchParams();
   const { maxPriceTicket, cities } = useContext(DetailsContext);
-  const [city, setCity] = useState({});
+  const [city, setCity] = useState("");
   const [tickets, setTickets] = useState([]);
 
 
   useEffect(() => {
     const obj = { ...form };
-    obj.fromCity = searchParams.get("fromCity");
-    obj.toCity = searchParams.get("toCity");
-    obj.minPrice = searchParams.get("minPrice");
-    obj.maxPrice = searchParams.get("maxPrice");
-    setForm(obj);
-    const newCity = cities.find(el => el.id === Number(obj.toCity));
-    setCity(newCity);
+    if (searchParams.toString() !== "") {
+      obj.fromCity = searchParams.get("fromCity");
+      obj.toCity = searchParams.get("toCity");
+      obj.minPrice = searchParams.get("minPrice");
+      obj.maxPrice = searchParams.get("maxPrice");
+      setForm(obj);
+      const newCity = cities.find(el => el.id === Number(obj.toCity));
+      () => { setCity(newCity); };
+    }
 
     const newQuery = createSearchParams(obj).toString();
-
     api.getTickets(newQuery)
       .then(res => setTickets(res.data))
       .catch(err => console.log(err));
@@ -74,15 +75,16 @@ export default function Tickets() {
             <Select name="fromCity"
               value={form.fromCity}
               onChange={handleChange}>
+              <option value={""}>Limpar escolha</option>
               {cities?.map(city => <option key={city.id} value={city.id}>{`${city.name}, ${city.stateName}, ${city.countryName}`}</option>)}
             </Select>
-
           </label>
           <label>
             Trocar cidade de destino
             <Select name="toCity"
               value={form.toCity}
               onChange={handleChange}>
+              <option value={""}>Limpar escolha</option>
               {cities?.map(city => <option key={city.id} value={city.id}>{`${city.name}, ${city.stateName}, ${city.countryName}`}</option>)}
             </Select>
           </label>
